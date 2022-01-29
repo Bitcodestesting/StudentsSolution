@@ -41,7 +41,27 @@ namespace StudentsWebApp.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-            return View();
+            StudentModel m = new StudentModel();
+            return View(m);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Add(StudentModel m)
+        {
+            if(!ModelState.IsValid || m == null)
+            {
+                return View();
+            }
+            else
+            {
+                Student s = new Student()
+                {
+                    StudentId = m.StudentId,
+                    StudentName = m.StudentName
+                };
+                stuRepo.Add(s);
+                return RedirectToAction("Index");
+            }
         }
     }
 }
