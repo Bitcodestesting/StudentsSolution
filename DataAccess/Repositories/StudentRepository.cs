@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DataAccess.Models;
 namespace DataAccess.Repositories
 {
-    
     public class StudentRepository
     {
         readonly StudentDbContext _db;
@@ -14,7 +10,10 @@ namespace DataAccess.Repositories
         {
             _db = db;
         }
-
+        public IEnumerable<Student> GetAllStudents()
+        {
+            return _db.Students.ToList();
+        }
         /// <summary>
         /// Add a new student to the table
         /// </summary>
@@ -23,7 +22,7 @@ namespace DataAccess.Repositories
         public bool Add(Student s)
         {
             bool result = false;
-            if(s== null)
+            if (s == null)
             {
                 result = false;
             }
@@ -35,7 +34,7 @@ namespace DataAccess.Repositories
                     _db.SaveChanges();
                     result = true;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     new Exception(ex.Message);
                     result = false;
@@ -43,11 +42,6 @@ namespace DataAccess.Repositories
             }
             return result;
         }
-
-
-        public IEnumerable<Student> GetAllStudents()
-        {
-            return _db.Students.ToList();
-        }
     }
+
 }

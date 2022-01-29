@@ -38,5 +38,10 @@ namespace StudentsWebApp.Controllers
             }
             return View(m);
         }
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return View();
+        }
     }
 }

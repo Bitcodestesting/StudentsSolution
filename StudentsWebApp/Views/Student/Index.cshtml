@@ -1,0 +1,40 @@
+﻿
+@model IEnumerable<StudentsWebApp.Models.StudentModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <a asp-action="create" asp-controller="Student" class="btn btn-primary float-right">Create</a>
+            <h1 class="card-title">
+                Students
+            </h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Student Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var obj in Model)
+                    {
+                        <tr>
+                            <td>@obj.StudentId</td>
+                            <td>@obj.StudentName</td>
+                            <td>
+                                <div class="btn-group">
+                                    <a class="btn btn-warning mr-1" asp-action="Edit" asp-controller="Student" asp-route-id="@obj.StudentId">Edit</a>
+                                    <a class="btn btn-danger mr-1" asp-action="Delete" asp-controller="Student" asp-route-id="@obj.StudentId">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
