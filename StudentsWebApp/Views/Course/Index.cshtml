@@ -1,0 +1,44 @@
+﻿@model IEnumerable<CourseModel>
+
+@{
+    ViewData["Title"] = "Course Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <a asp-action="Add" asp-controller="Course" class="btn btn-primary float-right">Add New Record</a>
+            <h1 class="card-title">
+                Courses
+                <small class="text-muted">(List of all courses.)</small>
+            </h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var obj in Model)
+                    {
+                    <tr>
+                        <td>@obj.CourseId</td>
+                        <td>@obj.CourseName</td>
+                        <td>@obj.CourseDescription</td>
+                        <td>
+                            <div class="btn-group">
+                                <a class="btn btn-warning mr-1" asp-action="Edit" asp-controller="Course" asp-route-id="@obj.CourseId">Edit</a>
+                                <a class="btn btn-danger mr-1" asp-action="Delete" asp-controller="Course" asp-route-id="@obj.CourseId">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+            <div asp-validation-summary="All" class="text-danger"></div>
+        </div>
+    </div>
+</div>

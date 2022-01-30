@@ -1,0 +1,31 @@
+﻿@model CourseModel
+@{
+    ViewData["Title"] = "Add Course";
+}
+<div class="container">
+
+    <div class="card">
+        <div class="card-body">
+            <a asp-action="index" asp-controller="Course" class="btn btn-primary float-right">Back to List</a>
+            <h1 class="card-title">
+                Add a new 'Course'
+            </h1>
+            <form method="post">
+                <div class="form-group">
+                    <label asp-for="CourseName"></label>
+                    <input asp-for="CourseName" class="form-control" />
+                    <span asp-validation-for="CourseName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CourseDescription"></label>
+                    <textarea asp-for="CourseDescription" class="form-control" cols="12" rows="5"></textarea>
+                    <span asp-validation-for="CourseDescription" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                </div>
+                <button type="submit" class="btn btn-success">Register</button>
+            </form>
+        </div>
+    </div>
+</div>

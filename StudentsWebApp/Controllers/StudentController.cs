@@ -75,7 +75,8 @@ namespace StudentsWebApp.Controllers
             
             if (s == null)
             {
-                return NotFound();
+                ModelState.AddModelError("", "No student is associated with selected - {id}");
+                return View();
             }
             else
             {
@@ -125,7 +126,7 @@ namespace StudentsWebApp.Controllers
             else
             {
                 ModelState.AddModelError("", "Student details not available!");
-                return View();
+                return RedirectToAction("Index");
             }
         }
 
