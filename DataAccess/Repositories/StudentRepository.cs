@@ -77,6 +77,39 @@ namespace DataAccess.Repositories
             }
             return result;
         }
+
+        /// <summary>
+        /// Delete Student Entry by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool Delete(int id)
+        {
+            bool result = false;
+            
+            try
+            {
+                Student student = _db.Students.Find(id);
+                if(student != null)
+                {
+                    _db.Students.Remove(student);
+                    _db.SaveChanges();
+                    result = true;
+                }
+                else
+                {
+                    result = false;
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                new Exception(ex.Message);
+                result = false;
+            }
+            
+            return result;
+        }
     }
 
 }

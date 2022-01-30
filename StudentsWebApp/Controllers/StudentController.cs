@@ -107,5 +107,50 @@ namespace StudentsWebApp.Controllers
             stuRepo.Update(student);
             return RedirectToAction("Index");
         }
+
+        /// <summary>
+        /// Delete selected student by student ID
+        /// </summary>
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            Student s = stuRepo.GetStudentById(id);
+            if(s != null)
+            {
+                StudentModel model = new StudentModel()
+                {
+                    StudentId = s.StudentId,
+                    StudentName = s.StudentName
+                };
+                return View(model);
+            }
+            else
+            {
+                ModelState.AddModelError("", "Student details not available!");
+                return View();
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(StudentModel model)
+        {
+            if(model != null && !ModelState.IsValid)
+            {
+                return View();
+            }
+            else
+            {
+                if(stuRepo.Delete(model.StudentId) == true)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View();
+                }
+
+            }
+        }
     }
 }
