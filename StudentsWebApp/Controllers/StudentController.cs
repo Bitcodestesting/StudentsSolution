@@ -64,7 +64,7 @@ namespace StudentsWebApp.Controllers
             }
         }
 
-
+        [HttpGet]
         public IActionResult Edit(int? id)
         {
             if (id == null || id == 0 || !ModelState.IsValid)
@@ -86,8 +86,6 @@ namespace StudentsWebApp.Controllers
                 };
                 return View(m);
             }
-            
-
         }
 
         [HttpPost]
@@ -135,7 +133,7 @@ namespace StudentsWebApp.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Delete(StudentModel model)
         {
-            if(model != null && !ModelState.IsValid)
+            if(model != null || !ModelState.IsValid)
             {
                 return View();
             }
