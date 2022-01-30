@@ -43,6 +43,40 @@ namespace DataAccess.Repositories
             }
             return result;
         }
+
+        public Student GetStudentById(int? id)
+        {
+            return _db.Students.Find(id);
+        }
+
+        /// <summary>
+        /// Update students
+        /// </summary>
+        /// <param name="student"></param>
+        /// <returns></returns>
+        public bool Update(Student student)
+        {
+            bool result = false;
+            if (student == null)
+            {
+                result = false;
+            }
+            else
+            {
+                try
+                {
+                    _db.Students.Update(student);
+                    _db.SaveChanges();
+                    result = true;
+                }
+                catch (Exception ex)
+                {
+                    new Exception(ex.Message);
+                    result = false;
+                }
+            }
+            return result;
+        }
     }
 
 }

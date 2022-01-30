@@ -63,5 +63,49 @@ namespace StudentsWebApp.Controllers
                 return RedirectToAction("Index");
             }
         }
+
+
+        public IActionResult Edit(int? id)
+        {
+            if (id == null || id == 0 || !ModelState.IsValid)
+            {
+                return View();
+            }
+            Student s = stuRepo.GetStudentById(id);
+            
+            if (s == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                StudentModel m = new StudentModel()
+                {
+                    StudentId = s.StudentId,
+                    StudentName = s.StudentName
+                };
+                return View(m);
+            }
+            
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(StudentModel s)
+        {
+            if (s == null || !ModelState.IsValid)
+            {
+                return View();
+            }
+            Student student = new Student()
+            {
+                StudentId = s.StudentId,
+                StudentName = s.StudentName
+            };
+
+            stuRepo.Update(student);
+            return RedirectToAction("Index");
+        }
     }
 }
